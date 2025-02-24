@@ -1,4 +1,4 @@
 .venv
 __pycache__
-tests
+personal
 */__pycache__
