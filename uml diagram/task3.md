@@ -1,3 +1,4 @@
+```mermaid
 sequenceDiagram
     participant Client
     participant API as Presentation Layer
@@ -41,3 +42,4 @@ sequenceDiagram
     BL->>BL: format_places_data()
     BL-->>API: places_list
     API-->>Client: 200 OK {places: [...]}
+```
