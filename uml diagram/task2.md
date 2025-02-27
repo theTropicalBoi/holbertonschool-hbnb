@@ -1,3 +1,4 @@
+```mermaid
 classDiagram
     class BaseModel {
         +UUID id
@@ -55,3 +56,4 @@ classDiagram
     User "1" --> "*" Review : writes
     Place "1" --> "*" Review : has
     Place "*" --> "*" Amenity : includes
+```

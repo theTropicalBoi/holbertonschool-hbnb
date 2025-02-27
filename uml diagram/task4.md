@@ -1,3 +1,4 @@
+```mermaid
 classDiagram
     class PresentationLayer {
         <<Interface>>
@@ -130,3 +131,4 @@ sequenceDiagram
     BL->>BL: format_places_data()
     BL-->>API: places_list
     API-->>Client: 200 OK {places: [...]}
+```

@@ -1,3 +1,4 @@
+```mermaid
 classDiagram
     class PresentationLayer {
         <<Interface>>
@@ -29,3 +30,4 @@ classDiagram
     PresentationLayer --> BusinessLogicFacade : uses
     BusinessLogicFacade --> BusinessLogicLayer : delegates to
     BusinessLogicLayer --> PersistenceLayer : uses
+```
