@@ -18,3 +18,7 @@ class BaseModel():
             if hasattr(self, key):
                 setattr(self, key, value)
             self.save() # Update the updated_at timestamp
+
+    def __repr__(self):
+        """ The BaseModel Instance. """
+        return f"<{self.__class__.__name__} id={self.id}>"
