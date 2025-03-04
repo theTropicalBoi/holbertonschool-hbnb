@@ -1,4 +1,5 @@
 from app.models.base_model import BaseModel
+import re
 
 
 class User(BaseModel):
@@ -9,18 +10,37 @@ class User(BaseModel):
         self.email = str(email)
         self.is_admin = bool(is_admin)
 
-    def is_valid(self):
-        if not self.first_name:
-            raise ValueError("The First name is required.")
-        if len(self.first_name) > 50:
-            raise ValueError("The First name should be 50 character or less.")
-        if not self.last_name:
-            raise ValueError("The Last name is required.")
-        if len(self.last_name) > 50:
-            raise ValueError("The Last name should be 50 character or less.")
-        if not self.email or '@' and '.' not in self.email:
-            raise ValueError("Valid email is required.")
-        
-    def update(self, data):
-        super().update(data)
-        self.validate()
+    @property
+    def first_name(self):
+        return self.first_name
+    
+    @first_name.setter
+    def first_name(self, value):
+        if not isinstance(value, str) or not value or len(value) > 50:
+            raise ValueError("First Name must be fill and less than 50 characters")
+        self.first_name = value
+
+    @property
+    def last_name(self):
+        return self.last_name
+    
+    @last_name.setter
+    def last_name(self, value):
+        if not isinstance(value, str) or not value or len(value) > 50:
+            raise ValueError("Last Name must be fill and less than 50 characters")
+        self.last_name = value
+
+    @property
+    def email(self):
+        return self.email
+    
+    @email.setter
+    def email(self, value):
+        if not isinstance(value, str) or not self.email_checker(value):
+            raise ValueError("Invalid e-mail format")
+        self.email = value
+
+    @staticmethod
+    def email_checker(email):
+        pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
+        return re.match(pattern, email) is not None
