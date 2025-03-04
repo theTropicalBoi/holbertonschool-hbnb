@@ -6,6 +6,7 @@ class Place(BaseModel):
     owner = User()
 
     def __init__(self, title, description, price, number_rooms, number_bathrooms, latitude, longitude, owner, ):
+        super().__init__()
         self.title = str(title)
         self.description = str(description)
         self.price = float(price) # Price per Night
