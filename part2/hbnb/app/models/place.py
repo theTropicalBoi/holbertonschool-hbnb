@@ -22,7 +22,7 @@ class Place(BaseModel):
     @property
     def title(self):
         return self.title
-    
+
     @title.setter
     def title(self, value):
         if not isinstance(value, str) or len(value) > 100:
@@ -33,7 +33,7 @@ class Place(BaseModel):
     @property
     def price(self):
         return self.price
-    
+
     @price.setter
     def price(self, value):
         if not isinstance(value, (int, float)) or value < 0:
@@ -44,7 +44,7 @@ class Place(BaseModel):
     @property
     def number_rooms(self):
         return self.number_rooms
-    
+
     @number_rooms.setter
     def number_rooms(self, value):
         if not isinstance(value, (int)) or value < 0:
