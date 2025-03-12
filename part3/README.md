@@ -1,4 +1,9 @@
-### Project Directory Structure:
+# Brief Intro:
+In the *part 3* we will extend the backend of the application by introducing **user authentification**, **authorization** and **database integratio** using *SQL Alchemy* and *SQLite* for development. Later, we'll configure *MySQL* for production environments. In this part, we will secure the backend, introduce persistent storage, and prepare the application for a scalable, real-world deployment.
+
+
+
+# Project Directory Structure:
 - The `app/` directory contains the core application code.
 - The `api/` subdirectory houses the *API endpoints*, organized by version (`v1/`).
 - The `models/` subdirectory contains the *business logic classes* (e.g., `user.py`, `place.py`).
