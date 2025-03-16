@@ -2,7 +2,7 @@ from .basemodel import BaseModel
 from .user import User
 
 class Place(BaseModel):
-    def __init__(self, title: str, price: float, latitude: str, longitude, owner, description=None):
+    def __init__(self, title:str, price:float, latitude:float, longitude:float, owner, description=None):
         super().__init__()
         self.title = title
         self.description = description
