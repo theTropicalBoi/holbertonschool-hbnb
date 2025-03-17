@@ -4,7 +4,7 @@ class Repository(ABC):
     @abstractmethod
     def add(self, obj):
         pass
-    
+
     @abstractmethod
     def get(self, obj_id):
         pass
@@ -14,17 +14,22 @@ class Repository(ABC):
         pass
 
     @abstractmethod
-    def update(self, obj_id):
+    def update(self, obj_id, data):
+        pass
+
+    @abstractmethod
+    def delete(self, obj_id):
         pass
 
     @abstractmethod
     def get_by_attribute(self, attr_name, attr_value):
         pass
 
+
 class InMemoryRepository(Repository):
     def __init__(self):
-        self.storage = {}
-    
+        self._storage = {}
+
     def add(self, obj):
         self._storage[obj.id] = obj
 
