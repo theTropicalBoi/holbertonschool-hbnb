@@ -4,3 +4,7 @@ personal
 */__pycache__
 .vscode
 .DS_Store
+/part3/env
+part3/hbnb/app/__pycache__/__init__.cpython-310.pyc
+part2/app/__pycache__/__init__.cpython-310.pyc
+.gitignore

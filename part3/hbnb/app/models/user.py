@@ -1,6 +1,8 @@
 from app.models.base_model import BaseModel
+from flask_bcrypt import Bcrypt
 import re
 
+bcrypt = Bcrypt()
 
 class User(BaseModel):
     def __init__(self, first_name, last_name, email, is_admin=False):
@@ -44,3 +46,8 @@ class User(BaseModel):
     def email_checker(email):
         pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
         return re.match(pattern, email) is not None
+
+    def hash_password(self, password):
+        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+        def check_password(self, password):
+            return bcrypt.check_password_hash(self.password, password)
