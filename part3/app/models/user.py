@@ -1,6 +1,7 @@
 from .basemodel import BaseModel
 import re
 import bcrypt
+from werkzeug.security import check_password_hash #FIXME - Implement a extension file to import directly from flask_bcrypt
 
 class User(BaseModel):
     emails = set()
@@ -70,7 +71,7 @@ class User(BaseModel):
 
     def verify_password(self, password):
         """Verifies if the provided password matches the hashed password."""
-        return bcrypt.check_password_hash(self.password, password)
+        return check_password_hash(self.password, password) #FIXME - When import change made, use `bcrypt.check_password_hash` directly.
 
     def add_place(self, place):
         """Add an amenity to the place."""
