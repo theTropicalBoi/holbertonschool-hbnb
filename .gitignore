@@ -6,3 +6,4 @@ personal
 .DS_Store
 /part3/env
 .gitignore
+requirements.txt
