@@ -39,3 +39,4 @@ erDiagram
     Place ||--|{ Review : "has"
     Place ||--|{ Place_Amenity : "includes"
     Amenity ||--|{ Place_Amenity : "belongs_to"
+    
