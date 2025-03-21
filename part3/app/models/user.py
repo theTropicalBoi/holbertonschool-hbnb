@@ -18,9 +18,6 @@ class User(BaseModel):
     # places = db.relationship('Place', backref='owner') 
     # reviews = db.relationship('Review', backref='reviews')
 
-    def __init__(self, first_name, last_name, email, password):
-        pass
-
     def hash_password(self, password):
         """Hashes the password before storing it."""
         self.password = bcrypt.generate_password_hash(password).decode('utf-8')
