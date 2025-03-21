@@ -51,12 +51,14 @@ class UserResource(Resource):
             return {'error': 'User not found'}, 404
         return user.to_dict(), 200
 
+
     @api.expect(user_model)
     @jwt_required
     @api.response(200, 'User updated successfully')
     @api.response(404, 'User not found')
     @api.response(400, 'Invalid input data')
     def put(self, user_id):
+        """Modify User by ID"""
         current_user = get_jwt_identity()
         user_data = api.payload
 
