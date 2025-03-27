@@ -1,12 +1,13 @@
 from flask import Flask
 from flask_restx import Api
-from app.extensions import bcrypt, jwt, db # Used the extensions to counter `ImportError`
+from app.extensions import bcrypt, jwt, db
 from app.api.v1.users import api as users_ns
 from app.api.v1.amenities import api as amenities_ns
 from app.api.v1.places import api as places_ns
 from app.api.v1.reviews import api as reviews_ns
 from app.api.v1.auth import api as auth_ns
 from app.api.v1.protected import api as protected_ns
+from app.test_models.create_admin import create_admin
 
 
 def create_app(config_class="config.DevelopmentConfig"):
@@ -16,8 +17,12 @@ def create_app(config_class="config.DevelopmentConfig"):
     bcrypt.init_app(app)
     jwt.init_app(app)
     db.init_app(app)
+
+    # FIXME - Extend the function to create properly the database:
     with app.app_context():
         db.create_all()
+
+    create_admin(app)
 
     api = Api(app, version='1.0', title='HBnB API', description='HBnB Application API')
 
