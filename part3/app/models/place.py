@@ -10,10 +10,7 @@ class Place(BaseModel):
     price = db.Column(db.Float, nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
-
-    #     self.owner = owner
-    #     self.reviews = []  # List to store related reviews
-    #     self.amenities = []  # List to store related amenities
+    # TODO - Add Table Relationship: Owner, Reviews, Amenities
 
     @property
     def title(self):

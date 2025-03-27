@@ -15,12 +15,14 @@ class User(BaseModel):
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
+    # TODO - Add Table Relationship:
     # places = db.relationship('Place', backref='owner') 
     # reviews = db.relationship('Review', backref='reviews')
 
-    def hash_password(self, password):
+    @staticmethod
+    def hash_password(password):
         """Hashes the password before storing it."""
-        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+        return bcrypt.generate_password_hash(password).decode('utf-8')
 
     def verify_password(self, password):
         """Verifies if the provided password matches the hashed password."""

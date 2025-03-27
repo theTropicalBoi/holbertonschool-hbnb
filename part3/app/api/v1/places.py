@@ -64,11 +64,11 @@ class PlaceResource(Resource):
             return {'error': 'Place not found'}, 404
         return place.to_dict_list(), 200
 
-    @jwt_required #TODO - Check if right place
     @api.expect(place_model)
     @api.response(200, 'Place updated successfully')
     @api.response(404, 'Place not found')
     @api.response(400, 'Invalid input data')
+    @jwt_required()
     def put(self, place_id):
         """Update a place's information"""
         current_user = get_jwt_identity()

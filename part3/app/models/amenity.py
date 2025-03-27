@@ -4,7 +4,9 @@ from app.extensions import db
 class Amenity(BaseModel):
 	__tablename__ = 'amenities'
 
-	name = db.Column(db.String, nullable=False)
+	name = db.Column(db.String(), nullable=False)
+
+	# TODO - Add Table Relationship: Places
 
 	@property
 	def name(self):

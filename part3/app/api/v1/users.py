@@ -1,7 +1,8 @@
 from flask_restx import Namespace, Resource, fields
-from flask import request
+#from flask import request
 from app.services import facade
 from flask_jwt_extended import jwt_required, get_jwt_identity
+from app.models.user import User
 
 api = Namespace('users', description='User operations')
 
@@ -10,14 +11,14 @@ user_model = api.model('User', {
     'first_name': fields.String(required=True, description='First name of the user'),
     'last_name': fields.String(required=True, description='Last name of the user'),
     'email': fields.String(required=True, description='Email of the user'),
-    'password': fields.String(required=True, description='Password of the user') #FIXME - Does it need to be added ?
+    'password': fields.String(required=True, description='Password of the user')
 })
 
 @api.route('/')
 class UserList(Resource):
     @api.expect(user_model, validate=True)
     @api.response(201, 'User successfully created')
-    @api.response(409, 'Email already registered') # Replaced
+    @api.response(409, 'Email already registered')
     @api.response(400, 'Invalid input data')
     def post(self):
         """Register a new user"""
@@ -25,15 +26,17 @@ class UserList(Resource):
 
         # Simulate email uniqueness check (to be replaced by real validation with persistence)
         existing_user = facade.get_user_by_email(user_data['email'])
-        if existing_user:
+        if (existing_user):
             return {'error': 'Email already registered'}, 409
 
         try:
+            hashed_password = User.hash_password(user_data['password'])
+            user_data['password'] = hashed_password
             new_user = facade.create_user(user_data)
             return new_user.to_dict(), 201
         except Exception as e:
             return {'error': str(e)}, 400
-        
+
     @api.response(200, 'List of users retrieved successfully')
     def get(self):
         """Retrieve a list of users"""
@@ -53,12 +56,12 @@ class UserResource(Resource):
 
 
     @api.expect(user_model)
-    @jwt_required
     @api.response(200, 'User updated successfully')
     @api.response(404, 'User not found')
     @api.response(400, 'Invalid input data')
+    @jwt_required()
     def put(self, user_id):
-        """Modify User by ID"""
+        """Modify user by ID"""
         current_user = get_jwt_identity()
         user_data = api.payload
 
