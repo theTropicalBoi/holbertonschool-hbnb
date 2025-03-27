@@ -16,5 +16,8 @@ def create_admin(app):
             password='adminpassword',
             is_admin=True
         )
+        hashed_password = User.hash_password(admin['password'])
+        User['password'] = hashed_password
+
         db.session.add(admin)
         db.session.commit()
