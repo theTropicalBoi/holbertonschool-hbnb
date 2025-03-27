@@ -15,7 +15,7 @@ class User(BaseModel):
     password = db.Column(db.String(128), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
-    # TODO - Add Table Relationship:
+    # @Daniel TODO - Add Table Relationship:
     # places = db.relationship('Place', backref='owner') 
     # reviews = db.relationship('Review', backref='reviews')
 

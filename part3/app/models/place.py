@@ -10,7 +10,7 @@ class Place(BaseModel):
     price = db.Column(db.Float, nullable=False)
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
-    # TODO - Add Table Relationship: Owner, Reviews, Amenities
+    # @Daniel TODO - Add Table Relationship: Owner, Reviews, Amenities
 
     @property
     def title(self):

@@ -9,7 +9,7 @@ class Review(BaseModel):
     text = db.Column(db.String, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
 
-    # TODO - Add Table Relationship:
+    # @Daniel TODO - Add Table Relationship:
     # place = db.relationship('Place', backref='reviews')
     # user = db.relationship('User', backref='users')
 

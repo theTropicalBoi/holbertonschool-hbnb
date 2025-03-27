@@ -6,7 +6,7 @@ class Amenity(BaseModel):
 
 	name = db.Column(db.String(), nullable=False)
 
-	# TODO - Add Table Relationship: Places
+	# @Daniel TODO - Add Table Relationship: Places 
 
 	@property
 	def name(self):
