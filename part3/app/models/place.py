@@ -1,17 +1,16 @@
 from .basemodel import BaseModel
 from .user import User
+from app.extensions import db
 
 class Place(BaseModel):
-    def __init__(self, title:str, price:float, latitude:float, longitude:float, owner, description=None):
-        super().__init__()
-        self.title = title
-        self.description = description
-        self.price = price
-        self.latitude = latitude
-        self.longitude = longitude
-        self.owner = owner
-        self.reviews = []  # List to store related reviews
-        self.amenities = []  # List to store related amenities
+    __tablename__ = 'places'
+
+    title = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    latitude = db.Column(db.Float, nullable=False)
+    longitude = db.Column(db.Float, nullable=False)
+    # TODO - Add Table Relationship: Owner, Reviews, Amenities
 
     @property
     def title(self):

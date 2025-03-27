@@ -1,77 +1,32 @@
 from .basemodel import BaseModel
 import re
-import bcrypt
-from werkzeug.security import check_password_hash #FIXME - Implement a extension file to import directly from flask_bcrypt
+from app.extensions import db, bcrypt
 
 class User(BaseModel):
-    emails = set()
+    """
+    ### User Class model
+    A class model for SQLAlchemy issued from BaseModel
+    """
+    __tablename__ = 'users'
 
-    def __init__(self, first_name:str, last_name:str, email:str, password:str, is_admin=False):
-        super().__init__()
-        self.first_name = first_name
-        self.last_name = last_name
-        self.email = email
-        self.is_admin = is_admin
-        self.places = []
-        self.reviews = []
-        self.password = password
-    
-    @property
-    def first_name(self):
-        return self.__first_name
-    
-    @first_name.setter
-    def first_name(self, value):
-        if not isinstance(value, str):
-            raise TypeError("First name must be a string")
-        super().is_max_length('First name', value, 50)
-        self.__first_name = value
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
+    email = db.Column(db.String(120), nullable=False, unique=True)
+    password = db.Column(db.String(128), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
 
-    @property
-    def last_name(self):
-        return self.__last_name
+    # TODO - Add Table Relationship:
+    # places = db.relationship('Place', backref='owner') 
+    # reviews = db.relationship('Review', backref='reviews')
 
-    @last_name.setter
-    def last_name(self, value):
-        if not isinstance(value, str):
-            raise TypeError("Last name must be a string")
-        super().is_max_length('Last name', value, 50)
-        self.__last_name = value
-
-    @property
-    def email(self):
-        return self.__email
-
-    @email.setter
-    def email(self, value):
-        if not isinstance(value, str):
-            raise TypeError("Email must be a string")
-        if not re.match(r"[^@]+@[^@]+\.[^@]+", value):
-            raise ValueError("Invalid email format")
-        if value in User.emails:
-            raise ValueError("Email already exists")
-        if hasattr(self, "_User__email"):
-            User.emails.discard(self.__email)
-        self.__email = value
-        User.emails.add(value)
-
-    @property
-    def is_admin(self):
-        return self.__is_admin
-    
-    @is_admin.setter
-    def is_admin(self, value):
-        if not isinstance(value, bool):
-            raise TypeError("Is Admin must be a boolean")
-        self.__is_admin = value
-
-    def hash_password(self, password):
+    @staticmethod
+    def hash_password(password):
         """Hashes the password before storing it."""
-        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
+        return bcrypt.generate_password_hash(password).decode('utf-8')
 
     def verify_password(self, password):
         """Verifies if the provided password matches the hashed password."""
-        return check_password_hash(self.password, password) #FIXME - When import change made, use `bcrypt.check_password_hash` directly.
+        return bcrypt.check_password_hash(self.password, password) #FIXED - When import change made, use `bcrypt.check_password_hash` directly.
 
     def add_place(self, place):
         """Add an amenity to the place."""
@@ -84,6 +39,13 @@ class User(BaseModel):
     def delete_review(self, review):
         """Add an amenity to the place."""
         self.reviews.remove(review)
+
+    @staticmethod
+    def validate_email(email):
+        """Validates the email format."""
+        email_regex = r"^\S+@\S+\.\S+$"
+        if not re.match(email_regex, email):
+            raise ValueError("Invalid email format")
 
     def to_dict(self):
         return {

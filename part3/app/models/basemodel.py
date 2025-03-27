@@ -1,4 +1,4 @@
-from app import db
+from app.extensions import db
 import uuid
 from datetime import datetime
 
@@ -6,8 +6,8 @@ class BaseModel(db.Model):
     __abstract__ = True # Ensures SQLAlchemy does not create a table for BaseModel
 
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
-    created_at = db.Column(db.DateTime, default=datetime.utcnow) #FIXME - Why does utcnow is strike ?
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = db.Column(db.DateTime(), default=datetime.now)
+    updated_at = db.Column(db.DateTime(), default=datetime.now, onupdate=datetime.now)
 
     def save(self):
         """Update the updated_at timestamp whenever the object is modified"""
@@ -19,12 +19,12 @@ class BaseModel(db.Model):
             if hasattr(self, key):
                 setattr(self, key, value)
         self.save()  # Update the updated_at timestamp
-        
+
+    # FIXME - Don't know if should keep both function
     def is_max_length(self, name, value, max_length):
         if len(value) > max_length:
             raise ValueError(f"{name} must be {max_length} characters max.") 
-        
-    
+
     def is_between(self, name, value, min, max):
         if not min < value < max:
             raise ValueError(f"{name} must be between {min} and {max}.")

@@ -1,9 +1,12 @@
 from .basemodel import BaseModel
+from app.extensions import db
 
 class Amenity(BaseModel):
-	def __init__(self, name:str):
-		super().__init__()	
-		self.name = name
+	__tablename__ = 'amenities'
+
+	name = db.Column(db.String(), nullable=False)
+
+	# TODO - Add Table Relationship: Places
 
 	@property
 	def name(self):
