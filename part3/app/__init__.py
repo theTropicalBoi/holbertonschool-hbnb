@@ -7,7 +7,6 @@ from app.api.v1.places import api as places_ns
 from app.api.v1.reviews import api as reviews_ns
 from app.api.v1.auth import api as auth_ns
 from app.api.v1.protected import api as protected_ns
-from app.test_models.create_admin import create_admin
 
 
 def create_app(config_class="config.DevelopmentConfig"):
@@ -22,8 +21,6 @@ def create_app(config_class="config.DevelopmentConfig"):
     # Logique commencer a etre crer mais faut qu'elle soit developper
     with app.app_context():
         db.create_all()
-
-    create_admin(app)
 
     api = Api(app, version='1.0', title='HBnB API', description='HBnB Application API')
 
