@@ -1,12 +1,16 @@
 from .basemodel import BaseModel
 from app.extensions import db
 
+
+
 class Amenity(BaseModel):
 	__tablename__ = 'amenities'
+	
 
 	name = db.Column(db.String(), nullable=False)
 
 	# @Daniel TODO - Add Table Relationship: Places 
+	places = db.relationship('Place', backref='amenity')
 
 	@property
 	def name(self):
