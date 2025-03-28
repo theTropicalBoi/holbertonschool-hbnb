@@ -5,12 +5,12 @@ from app.extensions import db
 
 class Amenity(BaseModel):
 	__tablename__ = 'amenities'
-	
 
-	name = db.Column(db.String(), nullable=False)
+
+	name = db.Column(db.String, nullable=False)
 
 	# @Daniel TODO - Add Table Relationship: Places 
-	places = db.relationship('Place', backref='amenity')
+	places = db.relationship('Place', back_populates='amenity')
 
 	@property
 	def name(self):

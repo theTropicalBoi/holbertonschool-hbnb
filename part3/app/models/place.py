@@ -11,10 +11,9 @@ class Place(BaseModel):
     latitude = db.Column(db.Float, nullable=False)
     longitude = db.Column(db.Float, nullable=False)
     # @Daniel TODO - Add Table Relationship: Owner, Reviews, Amenities
-    user = db.relationship("User", backref="places")
-    reviews = db.relationship("Review", backref="place")
-    amenities = db.relationship("Amenity", backref="places")
-
+    user = db.relationship("User", back_populates="places")
+    reviews = db.relationship("Review", back_populates="place")
+    amenities = db.relationship("Amenity", back_populates="places")
 
 
     @property

@@ -10,8 +10,8 @@ class Review(BaseModel):
     rating = db.Column(db.Integer, nullable=False)
 
     # @Daniel TODO - Add Table Relationship:
-    user = db.relationship("User", backref="reviews")
-    place = db.relationship("Place", backref="reviews")
+    user = db.relationship("User", back_populates="reviews")
+    place = db.relationship("Place", back_populates="reviews")
 
 
     @property
