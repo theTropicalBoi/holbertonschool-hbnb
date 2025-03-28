@@ -16,8 +16,8 @@ class User(BaseModel):
     is_admin = db.Column(db.Boolean, default=False)
 
     # @Daniel TODO - Add Table Relationship:
-    # places = db.relationship('Place', backref='owner') 
-    # reviews = db.relationship('Review', backref='reviews')
+    places = db.relationship('Place', backref='owner')
+    reviews = db.relationship('Review', backref='user')
 
     @staticmethod
     def hash_password(password):
