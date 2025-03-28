@@ -18,7 +18,8 @@ def create_app(config_class="config.DevelopmentConfig"):
     jwt.init_app(app)
     db.init_app(app)
 
-    # FIXME - Extend the function to create properly the database:
+    # TODO - Task 8 - Update DB Scheme and Tables
+    # Logique commencer a etre crer mais faut qu'elle soit developper
     with app.app_context():
         db.create_all()
 

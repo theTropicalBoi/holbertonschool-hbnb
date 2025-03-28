@@ -9,15 +9,17 @@ def create_admin(app):
             print("Admin user already exists")
             return
     
+        # Hash the password before creating the user
+        hashed_password = User.hash_password('adminpassword')
+        print(hashed_password)
+        
         admin = User(
             first_name='Admin',
             last_name='User',
             email='admin@hbnb.com',
-            password='adminpassword',
+            password=hashed_password,
             is_admin=True
         )
-        hashed_password = User.hash_password(admin['password'])
-        User['password'] = hashed_password
 
         db.session.add(admin)
         db.session.commit()

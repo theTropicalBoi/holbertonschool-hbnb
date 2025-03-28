@@ -20,8 +20,14 @@ class UserList(Resource):
     @api.response(201, 'User successfully created')
     @api.response(409, 'Email already registered')
     @api.response(400, 'Invalid input data')
+    @jwt_required()
     def post(self):
         """Register a new user"""
+        current_user = get_jwt_identity()
+
+        if not current_user.get('is_admin'):
+            return {'error': 'Admin privileges required'}, 403
+
         user_data = api.payload
 
         # Simulate email uniqueness check (to be replaced by real validation with persistence)
@@ -63,6 +69,10 @@ class UserResource(Resource):
     def put(self, user_id):
         """Modify user by ID"""
         current_user = get_jwt_identity()
+
+        if not current_user.get('is_admin'):
+            return {'error': 'Admin privileges required'}, 403
+
         user_data = api.payload
 
         if user_id != current_user:
