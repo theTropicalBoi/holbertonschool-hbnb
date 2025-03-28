@@ -9,9 +9,7 @@ def create_admin(app):
             print("Admin user already exists")
             return
     
-        # Hash the password before creating the user
         hashed_password = User.hash_password('adminpassword')
-        print(hashed_password)
         
         admin = User(
             first_name='Admin',
