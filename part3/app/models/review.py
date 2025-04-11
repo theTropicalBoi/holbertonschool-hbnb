@@ -1,67 +1,72 @@
-from .basemodel import BaseModel
-from .place import Place
-from .user import User
+from typing import TYPE_CHECKING
+from app.models.base import BaseModel
+from sqlalchemy.orm import validates
 from app.extensions import db
 
+if TYPE_CHECKING:
+    from app.models.place import Place
+    from app.models.user import User
+
+
 class Review(BaseModel):
+    
     __tablename__ = 'reviews'
 
-    text = db.Column(db.String, nullable=False)
+    text = db.Column(db.String(500), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
 
-    # @Daniel TODO - Add Table Relationship:
-    user = db.relationship("User", backref="reviews")
-    place = db.relationship("Place", backref="reviews")
+    place_id = db.Column(db.String(36), db.ForeignKey("places.id"), nullable=False)
+    user_id = db.Column(db.String(36), db.ForeignKey("user.id"), nullable=False)
+
+    user = db.relationship("User", back_populates="reviews")
+    place = db.relationship("Place", back_populates="reviews")
 
 
-    @property
-    def text(self):
-        return self.__text
-    
-    @text.setter
-    def text(self, value):
-        if not value:
-            raise ValueError("Text cannot be empty")
-        if not isinstance(value, str):
-            raise TypeError("Text must be a string")
-        self.__text = value
+    def __init__(self, text, rating, place, user) -> None:
+        super().__init__()
+        self.text: str = text
+        self.rating: int = rating
+        self.place: Place = place
+        self.user: User = user
 
-    @property
-    def rating(self):
-        return self.__rating
-    
-    @rating.setter
-    def rating(self, value):
-        if not isinstance(value, int):
-            raise TypeError("Rating must be an integer")
-        super().is_between('Rating', value, 1, 6)
-        self.__rating = value
+    @validates("text")
+    def validate_text(self, key, text):
+        """Setter for text."""
+        if not isinstance(text, str):
+            raise TypeError("text must be a string")
+        if not text or len(text) > 500:
+            raise ValueError(
+                "text cannot be empty and must be less than 500 characters"
+            )
 
-    @property
-    def place(self):
-        return self.__place
-    
-    @place.setter
-    def place(self, value):
-        if not isinstance(value, Place):
-            raise TypeError("Place must be a place instance")
-        self.__place = value
+        return text
 
-    @property
-    def user(self):
-        return self.__user
-    
-    @user.setter
-    def user(self, value):
-        if not isinstance(value, User):
-            raise TypeError("User must be a user instance")
-        self.__user = value
+    @validates("rating")
+    def validate_rating(self, key, rating):
+        """Setter for rating."""
+        if not isinstance(rating, (int, float)):
+            raise TypeError("rating must be an integer")
+        if rating < 1 or rating > 5:
+            raise ValueError("rating must be between 1 and 5")
 
-    def to_dict(self):
-        return {
-            'id': self.id,
-            'text': self.text,
-            'rating': self.rating,
-            'place_id': self.place.id,
-            'user_id': self.user.id
-        }
+        return rating
+
+    @validates("place")
+    def validate_place(self, key, place):
+        """Setter for place."""
+        from app.models.place import Place
+
+        if not isinstance(place, Place):
+            raise ValueError("place must be a Place instance")
+
+        return place
+
+    @validates("user")
+    def validate_user(self, key, user):
+        """Setter for user."""
+        from app.models.user import User
+
+        if not isinstance(user, User):
+            raise ValueError("user must be a User instance")
+
+        return user

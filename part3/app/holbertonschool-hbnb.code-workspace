@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"name": "holbertonschool-hbnb",
+			"path": "../.."
+		},
+		{
+			"name": "html",
+			"path": "../../../HBnB_v2/part4/html"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "holbertonschool-hbnb"
+	}
+}
