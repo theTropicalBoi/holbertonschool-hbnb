@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des lieux</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="../images/logo.png" alt="" class="logo">
+        <a href="login.html" id="login-link" class="login-button">Connexion</a>
+    </header>
+
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="login.html">Connexion</a>
+    </nav>
+
+    <main>
+        <select id="price-filter">
+            <option value="all">All</option>
+            <option value="10">Max 10€</option>
+            <option value="50">Max 50€</option>
+            <option value="100">Max 100€</option>
+        </select>
+        <section class="place-card">
+            <h3>Studio cosy à Paris</h3>
+            <p>Prix : 95€/nuit</p>
+            <a href="place.html"><button class="details-button">Voir les détails</button></a>
+        </section>
+
+        <section class="place-card">
+            <h3>Appartement Luxieux</h3>
+            <p>Prix : 120€/nuit</p>
+            <a href="place.html"><button class="details-button">Voir les détails</button></a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Tous droits réservés</p>
+    </footer>
+    <script src="1-script.js"></script>
+</body>
+</html>

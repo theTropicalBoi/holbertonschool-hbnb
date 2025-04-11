@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détails du lieu</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="../images/logo.png" alt="Logo" class="logo">
+        <a href="login.html" class="login-button">Connexion</a>
+    </header>
+
+    <nav>
+        <a href="index.html">Accueil</a>
+        <a href="login.html">Connexion</a>
+    </nav>
+
+    <main>
+
+        <section class="place-details">
+            <div class="place-info">
+                <h2>Studio cosy à Paris</h2>
+                <p>Hôte : YANN</p>
+                <p>Prix : 90€/nuit</p>
+                <p>Adresse : 123 Rue de Paris, 75001 Paris</p>
+                <p>Description : Studio charmant en plein cœur de Paris avec Wi-Fi et vue sur la ville.</p>
+                <ul>
+                    <li>Wi-Fi</li>
+                    <li>Climatisation</li>
+                    <li>Machine à café</li>
+                </ul>
+            </div>
+
+            <h3>Avis</h3>
+            <div class="review-card">
+                <p><strong>DANIEL :</strong> Excellent séjour !</p>
+                <p>Note : 5/5</p>
+            </div>
+
+            <a href="add_review.html"><button class="add-review">Ajouter un avis</button></a>
+        </section>
+        <section class="place-details">
+            <div class="place-info">
+                <h2>Appartement à Lyon</h2>
+                <p>Hôte : Neista Diaby</p>
+                <p>Prix : 120€/nuit</p>
+                <p>Adresse : 45 Rue Mercière, 69002 Lyon</p>
+                <p>Description : Bel appartement moderne situé dans le quartier animé de Lyon, proche des restaurants et des transports.</p>
+                <ul>
+                    <li>Wi-Fi</li>
+                    <li>Balcon</li>
+                    <li>Machine à laver</li>
+                    <li>TV écran plat</li>
+                </ul>
+            </div>
+        
+            <h3>Avis</h3>
+            <div class="review-card">
+                <p><strong>Sarah :</strong> Superbe appartement, très bien situé !</p>
+                <p>Note : 4/5</p>
+            </div>
+
+            <a href="add_review.html"><button class="add-review">Ajouter un avis</button></a>
+        </section>
+        <section id="add-review" class="add-review" style="display: none;">
+            <h3>Ajouter un avis</h3>
+            <form id="review-form">
+                <textarea name="comment" required placeholder="Votre avis..."></textarea>
+                <input type="number" name="rating" min="1" max="5" required>
+                <button type="submit">Envoyer</button>
+            </form>
+        </section>
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2025 - Tous droits réservés</p>
+    </footer>
+</body>
+</html>
