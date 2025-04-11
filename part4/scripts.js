@@ -271,10 +271,6 @@ async function submitReview(token, placeId, reviewText) {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ 
-        text: reviewText,
-        place_id: placeId
-      })
     });
 
     if (!response.ok) {
