@@ -1,0 +1,110 @@
+/* Just to have a color palette for the website */
+#fake_element {
+    color: #2B2D42;
+    color: #8D99AE;
+    color: #EDF2F4;
+    color: #EF233C;
+    color: #D90429;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', 'Roboto', Arial, sans-serif;
+}
+
+body {
+    background-color: #EDF2F4;
+    color: #2B2D42;
+}
+
+footer {
+    background-color: #EDF2F4;
+    color: #2B2D42;
+    padding: 1rem;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-decoration: none;
+    font-weight: 200;
+}
+
+
+
+
+/* Navbar */
+header {
+    background-color: #EDF2F4;
+    color: #8DA9C4;
+    padding: 1rem;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+/* Nav Bar Logo */
+#logo-img {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+#logo-img img {
+    height: 30px;
+    width: auto;
+    transition: transform 0.5s ease;
+}
+
+#logo-img img:hover {
+    transform: scale(1.05);
+}
+
+/* Nav Bar Login link. */
+#login-link {
+    background-color: #EDF2F4;
+    border: 1px solid #6d6d6d6d;
+    color: #EF233C;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    float: right;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#login-link:hover {
+    background-color: #6d6d6d6d;
+    border: 1px solid #6d6d6d;
+    color: #D90429;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+
+
+
+/* Main Content */
+main {
+    padding: 2rem;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+

@@ -5,7 +5,7 @@ from app.api.v1.amenities import api as amenities_ns
 from app.api.v1.places import api as places_ns
 from app.api.v1.reviews import api as reviews_ns
 from app.api.v1.auth import api as auth_ns
-from app.extensions import bcrypt, jwt, db
+from app.extensions import bcrypt, jwt, db, cors
 from app.database import init_db, seed_db
 
 def create_app(config_class="config.DevelopmentConfig"):
@@ -15,6 +15,16 @@ def create_app(config_class="config.DevelopmentConfig"):
     bcrypt.init_app(app=app)
     jwt.init_app(app=app)
     db.init_app(app)
+    
+    # Configure CORS
+    cors.init_app(app, resources={
+        r"/api/*": {
+            "origins": ["http://localhost:5500", "http://127.0.0.1:5500"],
+            "allow_headers": ["Content-Type", "Authorization"],
+            "max_age": 3600,
+        }
+    })
+    
     with app.app_context():
         init_db()
         seed_db()

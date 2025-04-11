@@ -10,7 +10,7 @@ class Config:
     ADMIN_LAST_NAME = 'HBnB'
     ADMIN_ID = '36c9050e-ddd3-4c3b-9731-9f487208bbc1'
     
-    INITIAL_AMENITIES = ['WiFi', 'Swimming Pool', 'Air Conditioning']
+    INITIAL_AMENITIES = ['Beachfront', 'Ocean View', 'WiFi', 'Swimming Pool', 'Air Conditioning', 'Free parking', 'Ski-in/ski-out', 'Heating']
 
 class DevelopmentConfig(Config):
     DEBUG = True

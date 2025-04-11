@@ -7,3 +7,7 @@ personal
 /part3/env
 .gitignore
 requirements.txt
+.idea/dataSources.xml
+.idea/holbertonschool-hbnb.iml
+.idea/modules.xml
+.idea/vcs.xml
